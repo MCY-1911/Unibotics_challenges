@@ -2,6 +2,15 @@ import cv2
 import HAL  
 import WebGUI  
 
+kp = 0.0118
+ki = 0.0001
+kd = 0.0001
+
+err_old = 0
+err_total = 0
+
+# kp * eer + ki * errtotal + Kd * (err - errOld)
+
 i = 0
 while True:
 
@@ -18,15 +27,16 @@ while True:
     else:
         cX, cY = 0, 0
         
-    err = 320 - cX    
-    if abs(err) < 2:
-        HAL.setV(8)
-    else: 
-        HAL.setV(3)
-    HAL.setW(0.01 * err)  
 
-
+    if cX > 0:
+        err = 320 - cX
+        if err > 80:
+            HAL.setV(4)
+            HAL.setW(kp * err)
+        else:
+            HAL.setV(7)
+            HAL.setW(kp * err)
+    i = i + 1
+    print(i)        
 
     WebGUI.showImage(red_mask)
-    # print('%d cX: %.2f cY: %.2f' % (i, cX, cY))
-    i = i + 1
