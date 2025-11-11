@@ -36,9 +36,9 @@ while True:
                 HAL.setV(vel)
             else:
                 vel = vel + 0.03
-                vel = min(vel, 28)
+                vel = min(vel, 230)
                 HAL.setV(vel)
-            HAL.setW(kp * err + kd * err_old)  
+            HAL.setW(kp * err + kd * (err - err_old))  
 
         WebGUI.showImage(red_mask)
     except Exception as e:
