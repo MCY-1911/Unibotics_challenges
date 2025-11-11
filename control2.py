@@ -36,7 +36,7 @@ while True:
                 HAL.setV(vel)
             else:
                 vel = vel + 0.03
-                vel = min(vel, 230)
+                vel = min(vel, 30)
                 HAL.setV(vel)
             HAL.setW(kp * err + kd * (err - err_old))  
 
