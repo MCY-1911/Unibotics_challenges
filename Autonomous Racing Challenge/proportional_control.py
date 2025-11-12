@@ -3,12 +3,9 @@ import HAL
 import WebGUI  
 
 kp = 0.0115
-
-err_old = 0
-err_total = 0
-
-i = 0
+err = 0
 vel = 6.5
+
 while True:
     try:
         img = HAL.getImage()
@@ -24,8 +21,8 @@ while True:
         else:
             cX, cY = 0, 0
 
+        err = 320 - cX
         if cX > 0:
-            err = 320 - cX
             if abs(err) > 50:
                 vel = 3.5
                 HAL.setV(vel)
@@ -34,10 +31,6 @@ while True:
                 vel = min(vel, 30)
                 HAL.setV(vel)
             HAL.setW(kp * err)
-                
-        i = i + 1
-        print(vel)        
-
         WebGUI.showImage(red_mask)
     except:
         print("An exception occurred") 
