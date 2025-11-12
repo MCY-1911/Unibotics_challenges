@@ -6,7 +6,6 @@ kp = 0.0115
 kd = 0.0015
 
 err_old = 0
-err_total = 0
 err = 0
 vel = 6.5
 
