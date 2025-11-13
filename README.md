@@ -54,14 +54,13 @@ The repository currently includes one Python script for each control strategy.
 ---
 
 ## Repository Structure
-'''
+```
 .
-├── P_controller.py # Proportional controller
-├── PD_controller.py # Proportional-Derivative controller
-├── PID_controller.py # Proportional-Integral-Derivative controller
+├── P_controller.py        # Proportional controller
+├── PD_controller.py       # Proportional-Derivative controller
+├── PID_controller.py      # Proportional-Integral-Derivative controller
 └── README.md
-'''
-
+```
 ---
 
 ## Performance Comparison
