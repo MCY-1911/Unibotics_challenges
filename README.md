@@ -112,12 +112,6 @@ The collected times clearly show how each control strategy behaves under the sam
 The objective of this challenge is to design an **autonomous rescue drone** capable of searching a predefined area to **locate human survivors** using onboard vision.  
 The drone must take off, reach a target search zone, systematically explore the area following an **Archimedean spiral trajectory**, detect human faces using a computer vision algorithm, and finally return to the base once the mission is completed.
 
-This challenge integrates:
-- Autonomous navigation
-- Area coverage strategies
-- Computer vision for human detection
-- Decision-making logic for rescue missions
-
 ---
 
 ### Mission Overview
@@ -158,7 +152,9 @@ The braking point is used to reduce velocity and stabilize the drone before swit
 Once stabilized, the drone navigates accurately to the search center coordinates.
 
 Position control ensures correct alignment before initiating the spiral search pattern.
----- 
+
+---
+
 #### Takeoff and Altitude Control
 
 The drone takes off to a fixed altitude of **3 meters** and maintains it using continuous vertical error correction.
@@ -166,21 +162,22 @@ The drone takes off to a fixed altitude of **3 meters** and maintains it using c
 The altitude error is computed as the difference between the desired height and the current altitude, and is applied as vertical velocity correction.
 
 This guarantees stable flight during navigation and perception tasks.
-----
+
+---
 ### Perception System
 
 The drone is equipped with a ventral camera used to detect human survivors during the search mission.
 
 All perception tasks are performed in real time using onboard image processing techniques.
-----
-#### Face Detection Algorithm
 
 Human detection is performed using **Haar Cascade classifiers** provided by OpenCV.
 
 This algorithm is lightweight and fast, making it suitable for real-time face detection in simulation environments.
 
 The ventral camera image is converted to grayscale before applying the detection algorithm.
-----
+
+---
+
 #### Image Rotation for Robust Detection
 
 To increase detection robustness, the ventral camera image is rotated through multiple angles:
@@ -193,7 +190,9 @@ For each rotation:
 - Analysed for face detection
 
 This approach compensates for different face orientations on the ground.
+
 ---
+
 ### Survivor Localization Logic
 
 When a face is detected, the drone stores its current (x, y) position as a survivor location.
@@ -202,7 +201,9 @@ To avoid duplicate detections, a minimum distance threshold of **3 meters** is e
 
 Only detections sufficiently far from existing ones are registered.  
 All survivor locations are stored in a set to ensure uniqueness.
+
 ---
+
 ### Return to Base
 
 Once the spiral search is completed, the drone navigates back to the home position `(0, 0)`.
@@ -212,6 +213,7 @@ During the return:
 - Position control ensures safe navigation
 
 After reaching the home position, the drone executes a controlled landing sequence.
+
 ----
 ### Results & Discussion
 
@@ -219,13 +221,7 @@ After reaching the home position, the drone executes a controlled landing sequen
 - Image rotation improves face detection reliability.
 - Distance-based filtering prevents duplicate survivor detections.
 - Haar Cascade detection performs well in controlled simulation conditions.
-----
-### Limitations & Future Improvements
-
-- Replace Haar Cascade classifiers with deep learning–based detectors.
-- Adapt spiral spacing dynamically based on confidence.
-- Integrate SLAM for unknown or dynamic environments.
-- Implement survivor prioritization mechanisms.
+- 
 ---
 ### Conclusions
 
